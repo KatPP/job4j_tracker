@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
 import ru.job4j.action.*;
-
-import java.util.Arrays;
-
 import java.util.List;
 
 public class StartUI {
@@ -13,11 +10,11 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public void init(Input input, Store tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             showMenu(actions);
-            int select = input.askInt("Выбрать: ");
+            int select = input.askInt("Select: ");
             if (select < 0 || select >= actions.size()) {
                 out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.size() - 1));
                 continue;
@@ -37,15 +34,21 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Input input = new ValidateInput(output, new ConsoleInput());
-        Tracker tracker = new Tracker();
-        List<UserAction> actions = Arrays.asList(new Create(output),
-                new FindAll(output),
-                new Replace(output),
-                new Delete(output),
-                new FindById(output),
-                new FindByName(output),
-                new Exit(output));
-        new StartUI(output).init(input, tracker, actions);
+        Input input = new ValidateInput(
+                output, new ConsoleInput());
+        try (Store tracker = new SqlTracker()) {
+            List<UserAction> actions = List.of(
+                    new Create(output),
+                    new Replace(output),
+                    new Delete(output),
+                    new FindAll(output),
+                    new FindById(output),
+                    new FindByName(output),
+                    new Exit(output)
+            );
+            new StartUI(output).init(input, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

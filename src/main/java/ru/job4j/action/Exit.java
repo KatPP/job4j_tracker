@@ -2,7 +2,7 @@ package ru.job4j.action;
 
 import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Output;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.Store;
 
 public class Exit implements UserAction {
     private final Output out;
@@ -17,8 +17,9 @@ public class Exit implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
-        out.println("=== Завершение программы ===");
-        return false;
+    public boolean execute(Input input, Store tracker) {
+            out.println("=== Завершение программы ===");
+            return false;
+
     }
 }
