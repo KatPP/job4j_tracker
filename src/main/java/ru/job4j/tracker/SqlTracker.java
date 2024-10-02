@@ -46,6 +46,10 @@ public class SqlTracker implements Store {
         }
     }
 
+    private Item createItemFromResultSet(ResultSet rs) throws SQLException {
+        return new Item(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("created").toLocalDateTime());
+    }
+
     @Override
     public void close() throws SQLException {
         if (connection != null) {
@@ -105,8 +109,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement prepStmt = connection.prepareStatement(sql)) {
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
-                Item item = new Item(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("created").toLocalDateTime());
-                res.add(item);
+                res.add(createItemFromResultSet(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -122,8 +125,7 @@ public class SqlTracker implements Store {
             prepStmt.setString(1, "%" + key + "%");
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
-                Item item = new Item(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("created").toLocalDateTime());
-                res.add(item);
+                res.add(createItemFromResultSet(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -139,7 +141,7 @@ public class SqlTracker implements Store {
             prepStmt.setInt(1, id);
             ResultSet rs = prepStmt.executeQuery();
             if (rs.next()) {
-                res = new Item(rs.getInt("id"), rs.getString("name"), rs.getTimestamp("created").toLocalDateTime());
+                res = createItemFromResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
