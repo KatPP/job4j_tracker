@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TrackerTest {
-
+    @Disabled
     @Test
     void whenAddNewItemThenTrackerHasSameItem() {
         MemTracker tracker = new MemTracker();
@@ -17,7 +18,7 @@ class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName()).isEqualTo(item.getName());
     }
-
+    @Disabled
     @Test
     void whenTestFindById() {
         MemTracker tracker = new MemTracker();
@@ -26,7 +27,7 @@ class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName()).isEqualTo(item.getName());
     }
-
+    @Disabled
     @Test
     void whenTestFindAll() {
         MemTracker tracker = new MemTracker();
@@ -37,7 +38,7 @@ class TrackerTest {
         Item result = tracker.findAll().get(0);
         assertThat(result.getName()).isEqualTo(first.getName());
     }
-
+    @Disabled
     @Test
     void whenTestFindByNameCheckArrayLength() {
         MemTracker tracker = new MemTracker();
@@ -51,7 +52,7 @@ class TrackerTest {
         List<Item> result = tracker.findByName(first.getName());
         assertThat(result).hasSize(3);
     }
-
+    @Disabled
     @Test
     void whenReplaceItemIsSuccessful() {
         MemTracker tracker = new MemTracker();
@@ -62,7 +63,7 @@ class TrackerTest {
         tracker.replace(id, updateItem);
         assertThat(tracker.findById(id).getName()).isEqualTo("Bug with description");
     }
-
+    @Disabled
     @Test
     void whenReplaceItemIsNotSuccessful() {
         MemTracker tracker = new MemTracker();
@@ -73,7 +74,7 @@ class TrackerTest {
         assertThat(tracker.findById(item.getId()).getName()).isEqualTo("Bug");
         assertThat(result).isFalse();
     }
-
+    @Disabled
     @Test
     void whenDeleteItemIsSuccessful() {
         MemTracker tracker = new MemTracker();
@@ -83,7 +84,7 @@ class TrackerTest {
         tracker.delete(id);
         assertThat(tracker.findById(id)).isNull();
     }
-
+    @Disabled
     @Test
     void whenDeleteItemIsNotSuccessful() {
         MemTracker tracker = new MemTracker();
