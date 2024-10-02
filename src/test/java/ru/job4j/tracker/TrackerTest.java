@@ -8,6 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TrackerTest {
+
     @Disabled
     @Test
     void whenAddNewItemThenTrackerHasSameItem() {
@@ -18,6 +19,7 @@ class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName()).isEqualTo(item.getName());
     }
+
     @Disabled
     @Test
     void whenTestFindById() {
@@ -27,6 +29,7 @@ class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName()).isEqualTo(item.getName());
     }
+
     @Disabled
     @Test
     void whenTestFindAll() {
@@ -38,6 +41,7 @@ class TrackerTest {
         Item result = tracker.findAll().get(0);
         assertThat(result.getName()).isEqualTo(first.getName());
     }
+
     @Disabled
     @Test
     void whenTestFindByNameCheckArrayLength() {
@@ -52,6 +56,7 @@ class TrackerTest {
         List<Item> result = tracker.findByName(first.getName());
         assertThat(result).hasSize(3);
     }
+
     @Disabled
     @Test
     void whenReplaceItemIsSuccessful() {
@@ -63,6 +68,7 @@ class TrackerTest {
         tracker.replace(id, updateItem);
         assertThat(tracker.findById(id).getName()).isEqualTo("Bug with description");
     }
+
     @Disabled
     @Test
     void whenReplaceItemIsNotSuccessful() {
@@ -74,6 +80,7 @@ class TrackerTest {
         assertThat(tracker.findById(item.getId()).getName()).isEqualTo("Bug");
         assertThat(result).isFalse();
     }
+
     @Disabled
     @Test
     void whenDeleteItemIsSuccessful() {
@@ -84,6 +91,7 @@ class TrackerTest {
         tracker.delete(id);
         assertThat(tracker.findById(id)).isNull();
     }
+
     @Disabled
     @Test
     void whenDeleteItemIsNotSuccessful() {
