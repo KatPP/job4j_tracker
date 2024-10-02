@@ -42,7 +42,6 @@ public class City {
         return Objects.hash(id, name, population);
     }
 
-    // Геттеры и сеттеры
     public int getId() {
         return id;
     }
