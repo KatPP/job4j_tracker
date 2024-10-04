@@ -63,7 +63,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, item.getName());
             preparedStatement.setTimestamp(2, timestampFromLDT);
-            preparedStatement.executeUpdate(); // Выполняем вставку
+            preparedStatement.executeUpdate();
 
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 if (rs.next()) {
