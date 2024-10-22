@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import ru.job4j.action.*;
+import ru.job4j.profile.CreateManyItems;
+import ru.job4j.profile.DeleteAllItems;
+
 import java.util.List;
 
 public class StartUI {
@@ -44,6 +47,8 @@ public class StartUI {
                     new FindAll(output),
                     new FindById(output),
                     new FindByName(output),
+                    new CreateManyItems(output),
+                    new DeleteAllItems(output),
                     new Exit(output)
             );
             new StartUI(output).init(input, tracker, actions);
